@@ -1,0 +1,113 @@
+<?php
+
+$xml = new SimpleXMLElement('<order/>');
+
+// basic order details
+$xml['id'] = $order->id;
+$xml->order_hash = $order->order_hash;
+$xml->member_id = $order->member_id;
+$xml->order_date = gmdate('c', $order->order_date);
+$xml->order_completed_date = gmdate('c', $order->order_completed_date);
+$xml->ip_address = $order->ip_address;
+$xml->ip_country = $order->ip_country;
+$xml->order_status_name = $order->order_status_name;
+$xml->order_status_updated = $order->order_status_updated;
+$xml->order_status_member_id = $order->order_status_member_id;
+$xml->order_status_message = $order->order_status_message;
+$xml->order_qty = $order->order_qty;
+$xml->order_subtotal = $order->order_subtotal;
+$xml->order_subtotal_tax = $order->order_subtotal_tax;
+$xml->order_discount = $order->order_discount;
+$xml->order_discount_tax = $order->order_discount_tax;
+$xml->order_shipping = $order->order_shipping;
+$xml->order_shipping_discount = $order->order_shipping_discount;
+$xml->order_shipping_tax = $order->order_shipping_tax;
+$xml->order_shipping_total = $order->order_shipping_total;
+$xml->order_handling = $order->order_handling;
+$xml->order_handling_tax = $order->order_handling_tax;
+$xml->order_handling_total = $order->order_handling_total;
+$xml->order_tax = $order->order_tax;
+$xml->order_total = $order->order_total;
+$xml->order_paid = $order->order_paid;
+$xml->order_paid_date = gmdate('c', $order->order_paid_date);
+$xml->order_email = $order->order_email;
+$xml->discount_id = $order->discount_id;
+$xml->promo_code = $order->promo_code;
+$xml->payment_method = $order->payment_method;
+$xml->shipping_method_name = $order->shipping_method_name;
+$xml->shipping_method = $order->shipping_method;
+$xml->shipping_method_class = $order->shipping_method_class;
+$xml->shipping_method_rule = $order->shipping_method_rule;
+$xml->tax_id = $order->tax_id;
+$xml->tax_name = $order->tax_name;
+$xml->tax_rate = $order->tax_rate;
+$xml->order_length = $order->order_length;
+$xml->order_width = $order->order_width;
+$xml->order_height = $order->order_height;
+$xml->dimension_units = $order->dimension_units;
+$xml->order_weight = $order->order_weight;
+$xml->weight_units = $order->weight_units;
+$xml->billing_first_name = $order->billing_first_name;
+$xml->billing_last_name = $order->billing_last_name;
+$xml->billing_address1 = $order->billing_address1;
+$xml->billing_address2 = $order->billing_address2;
+$xml->billing_city = $order->billing_city;
+$xml->billing_state = $order->billing_state;
+$xml->billing_country = $order->billing_country;
+$xml->billing_postcode = $order->billing_postcode;
+$xml->billing_phone = $order->billing_phone;
+$xml->billing_company = $order->billing_company;
+$xml->shipping_first_name = $order->shipping_first_name;
+$xml->shipping_last_name = $order->shipping_last_name;
+$xml->shipping_address1 = $order->shipping_address1;
+$xml->shipping_address2 = $order->shipping_address2;
+$xml->shipping_city = $order->shipping_city;
+$xml->shipping_state = $order->shipping_state;
+$xml->shipping_country = $order->shipping_country;
+$xml->shipping_postcode = $order->shipping_postcode;
+$xml->shipping_phone = $order->shipping_phone;
+$xml->shipping_company = $order->shipping_company;
+$xml->billing_same_as_shipping = $order->billing_same_as_shipping;
+$xml->shipping_same_as_billing = $order->shipping_same_as_billing;
+$xml->order_custom1 = $order->order_custom1;
+$xml->order_custom2 = $order->order_custom2;
+$xml->order_custom3 = $order->order_custom3;
+$xml->order_custom4 = $order->order_custom4;
+$xml->order_custom5 = $order->order_custom5;
+$xml->order_custom6 = $order->order_custom6;
+$xml->order_custom7 = $order->order_custom7;
+$xml->order_custom8 = $order->order_custom8;
+$xml->order_custom9 = $order->order_custom9;
+$xml->member_data_loaded = $order->member_data_loaded;
+$xml->tax_shipping = $order->tax_shipping;
+
+// order items
+foreach ($order->items as $i => $item) {
+    $xml->items->item[$i]->entry_id = $item->entry_id;
+    $xml->items->item[$i]->stock_id = $item->stock_id;
+    $xml->items->item[$i]->sku = $item->sku;
+    $xml->items->item[$i]->title = $item->title;
+    $xml->items->item[$i]->url_title = $item->url_title;
+    $xml->items->item[$i]->channel_id = $item->channel_id;
+    $xml->items->item[$i]->category_ids = '['.implode(', ', $item->category_ids).']';
+    $xml->items->item[$i]->modifiers = $item->modifiers_html;
+    $xml->items->item[$i]->price = $item->price;
+    $xml->items->item[$i]->regular_price = $item->regular_price;
+    $xml->items->item[$i]->on_sale = $item->on_sale;
+    $xml->items->item[$i]->weight = $item->weight;
+    $xml->items->item[$i]->length = $item->length;
+    $xml->items->item[$i]->width = $item->width;
+    $xml->items->item[$i]->height = $item->height;
+    $xml->items->item[$i]->handling = $item->handling;
+    $xml->items->item[$i]->handling_tax = $item->handling_tax;
+    $xml->items->item[$i]->free_shipping = $item->free_shipping;
+    $xml->items->item[$i]->tax_exempt = $item->tax_exempt;
+    $xml->items->item[$i]->item_qty = $item->item_qty;
+    $xml->items->item[$i]->item_subtotal = $item->item_subtotal;
+    $xml->items->item[$i]->item_discount = $item->item_discount;
+    $xml->items->item[$i]->item_tax = $item->item_tax;
+    $xml->items->item[$i]->item_total = $item->item_total;
+}
+
+// output the XML file
+return $xml;
